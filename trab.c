@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <string.h>
-
+#include<stdlib.h>
 #define TF 100
 
 int main() {
+    system("cls");
     // Variáveis
-    int opcaoMenuPrincipal, opcaoCadastro,vCod[TF],vQtde[TF],TLP = 0,vRG[TF],TLC = 0 ;
+    int opcaoMenuPrincipal, opcaoCadastro,vCod[TF],vQtde[TF],TLP = 0,vRG[TF],TLC = 0,opcaoRelatorio ;
     int cod, qtde, achou, i, j, rg, vendaExiste,TLV = 0,vQtdeV[TF],vCodV[TF],vRGV[TF] ;
     char vProdServ[TF][50],produto[50], cliente[50],vCliente[TF][50] ;
     float vPreco[TF],vPrecoV[TF];
@@ -76,7 +77,7 @@ int main() {
                         	i++;
                         }
                         if (achou == 1) {
-                            printf("Cliente já cadastrado.\n");
+                            printf("Cliente ja cadastrado.\n");
                         } else {
                             vRG[TLC] = rg;
                             strcpy(vCliente[TLC],cliente);
@@ -102,7 +103,7 @@ int main() {
 
                 switch (opcaoCadastro) {
                     case 1: // Produto
-                        printf("Digite o codigo do produto: ");
+                        printf("\nDigite o codigo do produto: ");
                         scanf("%d", &cod);
                         achou = 0;
                         i = 0;
@@ -111,7 +112,7 @@ int main() {
                             else i++;
                         }
                         if (achou == 0) {
-                            printf("Produto não encontrado.\n");
+                            printf("Produto nao encontrado.\n");
                         } else {
                             vendaExiste = 0;
                             j = 0;
@@ -120,7 +121,7 @@ int main() {
                                 j++;
                             }
                             if (vendaExiste == 1) {
-                                printf("Produto não pode ser excluído (há vendas).\n");
+                                printf("Produto nao pode ser excluido (ha vendas).\n");
                             } else {
                                 for (j = i; j < TLP - 1; j++) {
                                     vCod[j] = vCod[j + 1];
@@ -129,7 +130,7 @@ int main() {
                                     vPreco[j] = vPreco[j + 1];
                                 }
                                 TLP--;
-                                printf("Produto excluído.\n");
+                                printf("Produto excluido.\n");
                             }
                         }
                         break;
@@ -153,7 +154,7 @@ int main() {
                                 j++;
                             }
                             if (vendaExiste == 1) {
-                                printf("Cliente nao pode ser excluído (ha vendas).\n");
+                                printf("Cliente nao pode ser excluido (ha vendas).\n");
                             } else {
                                 for (j = i; j < TLC - 1; j++) {
                                     vRG[j] = vRG[j + 1];
@@ -182,7 +183,7 @@ int main() {
                             TLV--;
                             printf("Venda excluida.\n");
                         } else {
-                            printf("Índice invalido.\n");
+                            printf("Indice invalido.\n");
                         }
                         break;
 
@@ -202,7 +203,7 @@ int main() {
                 }
                 if (achou == 0) {
                     printf("Cliente nao cadastrado.\n");
-                    break;
+
                 }
 
                 printf("Digite o codigo do produto: ");
@@ -215,7 +216,6 @@ int main() {
                 }
                 if (achou == 0) {
                     printf("Produto nao cadastrado.\n");
-                    break;
                 }
 
                 printf("Digite a quantidade desejada: ");
@@ -234,31 +234,80 @@ int main() {
                 break;
 
             case 4: // Relatórios
-                printf("\n--- RELATORIOS ---\n");
-                printf("Produtos:\n");
-                for (i=0;i < TLP;i++) {
-                    printf("%d - %s | Estoque: %d | Preco: %.2f\n", vCod[i], vProdServ[i], vQtde[i], vPreco[i]);
-                }
+                printf("\n----Qual relatorio voce deseja:----");
+                printf("\n|    1 - Produtos  |");
+                printf("\n|    2 - Clientes  |");
+                printf("\n|    3 - vendas    |");
+                printf("\n|    4 - Todos     |");
+                printf("\n|    5 - Voltar    |");
+                printf("\n");
+                scanf("%d",&opcaoRelatorio);
+                while (opcaoRelatorio != 5)
+                {
+                    switch (opcaoRelatorio)
+                    {
+                    case 1:
+                    printf("\n--- RELATORIOS ---\n");
+                    printf("Produtos:\n");
+                    for (i=0;i < TLP;i++) {
+                        printf("%d - %s | Estoque: %d | Preco: %.2f\n", vCod[i], vProdServ[i], vQtde[i], vPreco[i]);
+                    }
+                        break;
+                    case 2:
+                        printf("\n--- RELATORIOS ---\n");
+                        printf("\nClientes:\n");
+                        for (i=0;i < TLC;i++) {
+                            printf("%d - %s\n", vRG[i], vCliente[i]);
+                        }
+                        break;
+                    case 3:
+                        printf("\n--- RELATORIO ---\n");
+                        printf("\nVendas:\n");
+                        for (i=0;i < TLV;i++) {
+                            printf("Cliente RG: %d | Produto: %d | Qtde: %d | Total: %.2f\n",
+                            vRGV[i], vCodV[i], vQtdeV[i], vPrecoV[i]);
+                        }
+                        break;
+                    case 4:
+                        printf("\n--- RELATORIOS ---\n");
+                        printf("Produtos:\n");
+                        for (i=0;i < TLP;i++) {
+                            printf("%d - %s | Estoque: %d | Preco: %.2f\n", vCod[i], vProdServ[i], vQtde[i], vPreco[i]);
+                        }
 
-                printf("\nClientes:\n");
-                for (i=0;i < TLC;i++) {
-                    printf("%d - %s\n", vRG[i], vCliente[i]);
-                }
+                        printf("\nClientes:\n");
+                        for (i=0;i < TLC;i++) {
+                            printf("%d - %s\n", vRG[i], vCliente[i]);
+                        }
 
-                printf("\nVendas:\n");
-                for (i=0;i < TLV;i++) {
-                    printf("Cliente RG: %d | Produto: %d | Qtde: %d | Total: %.2f\n",
-                        vRGV[i], vCodV[i], vQtdeV[i], vPrecoV[i]);
-                }
-                break;
+                        printf("\nVendas:\n");
+                        for (i=0;i < TLV;i++) {
+                            printf("Cliente RG: %d | Produto: %d | Qtde: %d | Total: %.2f\n",
+                            vRGV[i], vCodV[i], vQtdeV[i], vPrecoV[i]);
+                        }
+                        break;
+                    case 5:
+                        printf("\nRetornando...");
+                        break;
+                    default:
+                        printf("\nOpcao invalida");
+                        break;
+                    }
 
+
+
+                printf("\n----Qual relatorio voce deseja:----");
+                printf("\n|    1 - Produtos  |");
+                printf("\n|    2 - Clientes  |");
+                printf("\n|    3 - vendas    |");
+                printf("\n|    4 - Todos     |");
+                printf("\n|    5 - Voltar    |");
+                printf("\n");
+                scanf("%d",&opcaoRelatorio);
+                }
             case 5:
                 printf("Finalizando programa.\n");
-                return 0;
 
-            default:
-                printf("Opção inválida.\n");
-                break;
         }
     }
 
