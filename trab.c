@@ -4,14 +4,13 @@
 #define TF 100
 
 int main() {
-    system("cls");
+    
     // Variáveis
     int opcaoMenuPrincipal, opcaoCadastro,vCod[TF],vQtde[TF],TLP = 0,vRG[TF],TLC = 0,opcaoRelatorio ;
-    int cod, qtde, achou, i, j, rg, vendaExiste,TLV = 0,vQtdeV[TF],vCodV[TF],vRGV[TF] ;
+    int cod, qtde, achou, i, j, rg, vendaExiste,TLV = 0,vQtdeV[TF],vCodV[TF],vRGV[TF], op ;
     char vProdServ[TF][50],produto[50], cliente[50],vCliente[TF][50] ;
     float vPreco[TF],vPrecoV[TF];
-    while (1) {
-        printf("\n === MENU PRINCIPAL ===\n");
+    printf("\n === MENU PRINCIPAL ===\n");
         printf("|   1-   Cadastrar     |\n");
         printf("|   2-   Excluir       |\n");
         printf("|   3-   venda         |\n");
@@ -20,8 +19,9 @@ int main() {
         printf("|----------------------|\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcaoMenuPrincipal);
-
+    while (op != 5) {
         switch (opcaoMenuPrincipal) {
+            system("cls");
             case 1: // Cadastro
                 printf("\n -------- Cadastro --------\n");
                 printf("|   1 - Produtos/Servicos  |\n");
@@ -308,7 +308,19 @@ int main() {
             case 5:
                 printf("Finalizando programa.\n");
 
+            default:
+                printf("Opção invalida.\n");
+                break;
         }
+        printf("\n === MENU PRINCIPAL ===\n");
+        printf("|   1-   Cadastrar     |\n");
+        printf("|   2-   Excluir       |\n");
+        printf("|   3-   venda         |\n");
+        printf("|   4-   Relatorios    |\n");
+        printf("|   5-   Finalizar     |\n");
+        printf("|----------------------|\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcaoMenuPrincipal);
     }
 
     return 0;
